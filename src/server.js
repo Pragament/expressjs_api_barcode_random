@@ -21,6 +21,11 @@ app.get('/product/:barcode', (req, res) => {
   if (!barcode) {
     return res.status(400).json({ error: "Barcode is required" });
   }
+  // Randomly throw 404 for testing
+    const throw404 = Math.random() < 0.5;
+    if (throw404) {
+      return res.status(404).json({ error: `Barcode ${barcode} not found` });
+    }
 
   const randomProduct = products[Math.floor(Math.random() * products.length)];
   const response = `${randomProduct} (${barcode})`;
